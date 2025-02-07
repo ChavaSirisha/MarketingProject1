@@ -14,16 +14,16 @@ pipeline {
                 git branch: "main", credentialsId: 'git-cred-ID', url: 'https://github.com/ChavaSirisha/MarketingProject1.git'
             }
         }
-        // stage('Maven Compile') {
-        //     steps {
-        //         sh 'mvn compile'
-        //     }
-        // }
-        // stage('Maven Test') {
-        //     steps {
-        //         sh 'mvn test'
-        //     }
-        // }
+        stage('Maven Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('Maven Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
         
         // stage('Sonarqube Analysis') {
         //     steps {
