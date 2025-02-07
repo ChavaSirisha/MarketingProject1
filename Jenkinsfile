@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    // tools {
-    //     maven 'maven3'
-    // }
+    tools {
+        maven 'maven3'
+    }
     // environment {
     //     SCANNER_HOME= tool 'sonar-scanner'
     //     DOCKER_IMAGE= "anithapatcha/springboot:${env.BUILD_NUMBER}"
