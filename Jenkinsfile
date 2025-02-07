@@ -3,10 +3,10 @@ pipeline {
     tools {
         maven 'maven3'
     }
-    // environment {
-    //     SCANNER_HOME= tool 'sonar-scanner'
-    //     DOCKER_IMAGE= "anithapatcha/springboot:${env.BUILD_NUMBER}"
-    // }
+    environment {
+        SCANNER_HOME= tool 'sonar-scanner'
+        DOCKER_IMAGE= "anithapatcha/springboot:${env.BUILD_NUMBER}"
+    }
 
     stages {
         stage('Git Checkout') {
@@ -25,21 +25,21 @@ pipeline {
             }
         }
         
-        // stage('Sonarqube Analysis') {
-        //     steps {
-        //         withSonarQubeEnv('sonar') {
-        //         sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BoardGame -Dsonar.projectKey=BoardGame \
-        //                                                -Dsonar.java.binaries=. -Dsonar.exclusions=**/trivy-fs-report.html'''
-        //         }
-        //     }
-        // }
-        // stage('Quality Gate') {
-        //     steps {
-        //         script {
-        //             waitForQualityGate abortPipeline: false, credentialsId: 'sonar'
-        //         }
-        //     }
-        // }
+        stage('Sonarqube Analysis') {
+            steps {
+                withSonarQubeEnv('sonar') {
+                sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BoardGame -Dsonar.projectKey=BoardGame \
+                                                       -Dsonar.java.binaries=. -Dsonar.exclusions=**/trivy-fs-report.html'''
+                }
+            }
+        }
+        stage('Quality Gate') {
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar'
+                }
+            }
+        }
         // stage('Maven Build') {
         //     steps {
         //         sh 'mvn package -DskipTests'
