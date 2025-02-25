@@ -43,6 +43,7 @@ sudo ./aws/install
 #switch to jenkins user
 sudo su - jenkins
 
+
 #EKSCTL Install
 # for ARM systems, set ARCH to: `arm64`, `armv6` or `armv7`
 ARCH=amd64
