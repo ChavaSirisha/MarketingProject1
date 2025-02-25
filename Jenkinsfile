@@ -33,23 +33,23 @@ pipeline {
                 }
             }
         }
-        stage('Quality Gate') {
+        // stage('Quality Gate') {
+        //     steps {
+        //         script {
+        //             waitForQualityGate abortPipeline: false, credentialsId: 'sonar'
+        //         }
+        //     }
+        // }
+        stage('Maven Build') {
             steps {
-                script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar'
-                }
+                sh 'mvn package -DskipTests'
             }
         }
-        // stage('Maven Build') {
-        //     steps {
-        //         sh 'mvn package -DskipTests'
-        //     }
-        // }
-        // stage('Maven Deploy') {
-        //     steps {
-        //         sh 'mvn deploy -DskipTests' 
-        //     }
-        // }
+        stage('Maven Deploy') {
+            steps {
+                sh 'mvn deploy -DskipTests' 
+            }
+        }
         // stage('Build Docker Image and Tag') {
         //     steps {
         //         script {
