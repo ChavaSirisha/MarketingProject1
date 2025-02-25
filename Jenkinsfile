@@ -5,7 +5,7 @@ pipeline {
     }
     environment {
         SCANNER_HOME= tool 'sonar-scanner'
-        //DOCKER_IMAGE= "anithapatcha/springboot:${env.BUILD_NUMBER}"
+        DOCKER_IMAGE= "anithapatcha/springboot:${env.BUILD_NUMBER}"
     }
 
     stages {
