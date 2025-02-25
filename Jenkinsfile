@@ -40,16 +40,16 @@ pipeline {
         //         }
         //     }
         // }
-        // stage('Maven Build') {
-        //     steps {
-        //         sh 'mvn package -DskipTests'
-        //     }
-        // }
-        // stage('Maven Deploy') {
-        //     steps {
-        //         sh 'mvn deploy -DskipTests' 
-        //     }
-        // }
+        stage('Maven Build') {
+            steps {
+                sh 'mvn package -DskipTests'
+            }
+        }
+        stage('Maven Deploy') {
+            steps {
+                sh 'mvn deploy -DskipTests' 
+            }
+        }
         // stage('Build Docker Image and Tag') {
         //     steps {
         //         script {
