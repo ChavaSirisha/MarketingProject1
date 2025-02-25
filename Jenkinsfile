@@ -5,7 +5,7 @@ pipeline {
     }
     environment {
         SCANNER_HOME= tool 'sonar-scanner'
-        DOCKER_IMAGE= "anithapatcha/springboot:${env.BUILD_NUMBER}"
+        //DOCKER_IMAGE= "anithapatcha/springboot:${env.BUILD_NUMBER}"
     }
 
     stages {
@@ -40,16 +40,16 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Maven Build') {
-            steps {
-                sh 'mvn package -DskipTests'
-            }
-        }
-        stage('Maven Deploy') {
-            steps {
-                sh 'mvn deploy -DskipTests' 
-            }
-        }
+        // stage('Maven Build') {
+        //     steps {
+        //         sh 'mvn package -DskipTests'
+        //     }
+        // }
+        // stage('Maven Deploy') {
+        //     steps {
+        //         sh 'mvn deploy -DskipTests' 
+        //     }
+        // }
         // stage('Build Docker Image and Tag') {
         //     steps {
         //         script {
