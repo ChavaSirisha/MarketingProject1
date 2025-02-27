@@ -5,7 +5,6 @@ pipeline {
     }
     environment {
         SCANNER_HOME= tool 'sonar-scanner'
-        //DOCKER_IMAGE= "anithapatcha/springboot:${env.BUILD_NUMBER}"
     }
 
     stages {
@@ -29,7 +28,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonar') {
                 sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BoardGame -Dsonar.projectKey=BoardGame \
-                                                       -Dsonar.java.binaries=. -Dsonar.exclusions=**/trivy-fs-report.html'''
+                                                       -Dsonar.java.binaries=.'''
                 }
             }
         }
@@ -45,34 +44,7 @@ pipeline {
                 sh 'mvn package -DskipTests'
             }
         }
-        stage('Maven Deploy') {
-            steps {
-                sh 'mvn deploy -DskipTests' 
-            }
-        }
-        // stage('Build Docker Image and Tag') {
-        //     steps {
-        //         script {
-        //             withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-        //             sh 'docker build -t ${DOCKER_IMAGE} .'
-        //             }
-        //         }
-        //     }
-        // }  
-        // stage('Docker Image Scan') {
-        //     steps {
-        //         sh 'trivy image --format table -o try-image-report.html ${DOCKER_IMAGE}'
-        //     }
-        // } 
-        // stage('Push Docker Image') {
-        //     steps {
-        //         script {
-        //             withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-        //                 sh 'docker push ${DOCKER_IMAGE}'
-        //             }
-        //         }
-        //     } 
-        // }
+        
         // stage ('Deploy to Kubernetes'){
         //     steps {
         //         script {
