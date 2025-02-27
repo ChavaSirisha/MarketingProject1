@@ -23,7 +23,6 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        
         stage('Sonarqube Analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
@@ -32,26 +31,18 @@ pipeline {
                 }
             }
         }
-        stage('Quality Gate') {
-            steps {
-                script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar'
-                }
-            }
-        }
         stage('Maven Build') {
             steps {
                 sh 'mvn package -DskipTests'
             }
         }
-        
-        // stage ('Deploy to Kubernetes'){
-        //     steps {
-        //         script {
-        //             sh 'kubectl apply -f deployment-services.yaml'
-        //             sh 'kubectl apply -f svc.yaml'
-        //         }
-        //     }
-        // }  
+        stage ('Deploy to Kubernetes'){
+            steps {
+                script {
+                    sh 'kubectl apply -f deployment-services.yaml'
+                    sh 'kubectl apply -f svc.yaml'
+                }
+            }
+        }  
     }
 }
