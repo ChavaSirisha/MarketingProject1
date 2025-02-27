@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: boardgame
-        image: anithapatcha/springboot:latest
+        image: anithapatcha/springboot:2
         ports:
         - containerPort: 8080
